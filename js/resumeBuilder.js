@@ -9,7 +9,7 @@ var bio = {
 },
 "pictureUrl" : "images/me.png",
 "welcomeMsg" : "Hey there, it's Martin!",
-"skills" : ["not", "so", "cool"]
+"skills" : ["mega","man","oida"]
 };
 
 var work = {
@@ -74,3 +74,34 @@ var education = {
 		"url": "https://de.udacity.com/course/javascript-basics--ud804/"
 	}
 ]};
+
+function displayWork()
+{
+	if (bio.skills.length !== 0)
+	{
+		$("#header").append(HTMLskillsStart)
+		
+		for (var i = 0; i < bio.skills.length; i++)
+		$("#skills").append(HTMLskills.replace("%data%",bio.skills[i]))
+	};
+
+	for (job in work.jobs)
+	{
+		if (work.jobs.hasOwnProperty(job))
+		{
+			$("#workExperience").append(HTMLworkStart)
+			var formattedEmployer = HTMLworkEmployer.replace("%data%",work.jobs[job].employer);
+			var formattedTitle = HTMLworkTitle.replace("%data%",work.jobs[job].title);
+			var formattedEmployerTitle = formattedEmployer + formattedTitle;
+			$(".work-entry:last").append(formattedEmployerTitle);
+			$(".work-entry:last").append(HTMLworkDates.replace("%data%",work.jobs[job].dates));
+			$(".work-entry:last").append(HTMLworkDescription.replace("%data%",work.jobs[job].description));
+
+		}
+	}}
+$(document).click(function(loc) {
+  var cor = {x:0, y:0};
+  cor.x = loc.pageX;
+  cor.y = loc.pageY;
+  logClicks(cor.x,cor.y);
+});
